@@ -2,118 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\add_brand_request;
 use App\Models\Brand;
-use App\Models\Lead;
-use App\Models\Comment;
-use App\Models\LeadAssign;
 use App\Models\Payment;
 use App\Models\User;
 use App\Models\UserBrand;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use DB;
 use PDF;
-use Illuminate\Support\Facades\DB as FacadesDB;
-
-use function GuzzleHttp\Promise\all;
 
 class HomeController extends Controller
 {
+
     private $user = null;
     private $brand = null;
     private $payment = null;
     private $user_brand = null;
-    private $lead = null;
-    private $lead_assigned = null;
 
     public function __construct()
     {
+        $this->middleware('auth');
         $this->user = new User();
         $this->brand = new Brand();
         $this->payment = new Payment();
         $this->user_brand = new UserBrand();
-        $this->lead = new Lead();
-        $this->lead_assigned = new LeadAssign();
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function index()
     {
-        $id = Auth::user()->id;
-        $user = $this->user->find_user($id);
-        $today = $this->user->today($id);
-        $month = $this->user->month($id);
-        $un_paid = $this->user->un_paid($id);
-        $year = $this->user->year($id);
-        $user_brand = $this->user_brand->get_brands($id);
-        $team = $this->user->team($id);
-        $team_sale = $this->user->team_sale($id);
-        $payments = $this->payment->get_paid_payments_by_user();
-        $unpad_leads = $this->payment->get_unpaid_payments();
-        $lead_assigned = $this->lead_assigned->assigned_leads();
-        $paid_leads = $this->payment->get_paid_payments();
-        return view('lead.profile', compact('user', 'paid_leads', 'today', 'month', 'un_paid', 'year', 'user_brand', 'team', 'team_sale', 'payments', 'unpad_leads', 'lead_assigned'));
-    }
-
-    public function chart(Request $request)
-    {
-        $dates = $this->payment->dates($request->id);
-        return response()->json($dates);
-    }
-
-
-    public function add_lead()
-    {
-        $filter = $this->lead->filter_leads();
-        $leads = $this->lead->all_leads();
-        $users = $this->user->users_without_team_lead();
-        return view('lead.lead.add_lead', compact('leads', 'filter', 'users'));
-    }
-
-    public function add_new_lead()
-    {
-        return view('lead.lead.add_new_lead');
-    }
-
-    public function create_lead(Request $request)
-    {
-        $result = $this->lead->insert($request);
-        if ($result) {
-            return back()->with('success', 'Lead Has Been Added Succesfully');
-        } else {
-            return back()->with('error', 'Lead Has Failed To Be Added.');
-        }
-    }
-
-    public function edit_lead($id)
-    {
-        $lead = $this->lead->show_lead($id);
-        return view('lead.lead.edit_lead', compact('lead'));
-    }
-
-
-    public function update_lead(Request $request)
-    {
-        $result = $this->lead->update_lead($request);
-        if ($result) {
-            return back()->with('success', 'Lead Has Been Updated Succesfully');
-        } else {
-            return back()->with('error', 'Lead Has Failed To Be Update.');
-        }
-    }
-
-    public function add_comment(Request $request){
-        // dd($request->all());
-        $comment = new Comment();
-        $comment->user_id = Auth::user()->id;
-        $comment->comment = $request->comment;
-        $comment->lead_id = $request->lead_id;
-        $comment->save();
-        return back();
-    }
-
-    public function comments(Request $request){
-        $comments = FacadesDB::table('comments as c')->select('c.comment', 'c.created_at', 'u.name', 'u.last_name')->join('users as u', 'c.user_id', 'u.id')->where('lead_id', $request->id)->take(5)->orderBy('c.id', 'desc')->get();
-        return response()->json($comments);
+        $brands = $this->brand->get_brands();
+        $all_brands = $this->brand->get_all_brands();
+        $users = $this->user->get_users();
+        $all_users = $this->user->all_users();
+        $payments = $this->payment->get_paid_payments();
+        $today = $this->payment->today();
+        $yesterday = $this->payment->yesterday();
+        $month = $this->payment->month();
+        $un_paid_month = $this->payment->un_paid_month();
+        $last_month = $this->payment->last_month();
+        $year = $this->payment->year();
+        $target = $this->user->target();
+        $result =  $this->payment->month_sale();
+        $month_upsale = $result->upsell_amount;
+        $month_sale = $result->front_sale_amount;
+        $UnPaid = $this->payment->get_unpaid_payments_all();
+        return view('home', compact('brands', 'UnPaid', 'month_upsale', 'month_sale', 'all_brands', 'users', 'all_users', 'payments', 'today', 'yesterday', 'month', 'last_month', 'year', 'un_paid_month', 'target'));
     }
 
     public function generatePdf($id){
@@ -139,4 +79,11 @@ class HomeController extends Controller
 
         }
     }
+
+    public function chart(Request $request)
+    {
+        $dates = $this->payment->dates($request->id);
+        return response()->json($dates);
+    }
+
 }

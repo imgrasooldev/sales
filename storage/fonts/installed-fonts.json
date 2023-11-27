@@ -1,8 +1,8 @@
 {
     "montserrat": {
-        "normal": "\/var\/www\/sales\/storage\/fonts\/montserrat_normal_00833106404dc8458cdfb436c759f23d",
-        "300": "\/var\/www\/sales\/storage\/fonts\/montserrat_300_11be3eb1825a588a468235740322e12d",
-        "500": "montserrat_500_1236ec90acb329158f494b3fcb44327e",
-        "600": "\/var\/www\/sales\/storage\/fonts\/montserrat_600_485729d96603ccf9729bf58de2db0851"
+        "normal": "D:\\Manzoor\\revamp_sales_portal\\storage\\fonts\/montserrat_normal_00833106404dc8458cdfb436c759f23d",
+        "300": "D:\\Manzoor\\revamp_sales_portal\\storage\\fonts\/montserrat_300_11be3eb1825a588a468235740322e12d",
+        "500": "D:\\Manzoor\\revamp_sales_portal\\storage\\fonts\/montserrat_500_1236ec90acb329158f494b3fcb44327e",
+        "600": "montserrat_600_485729d96603ccf9729bf58de2db0851"
     }
 }

@@ -22,7 +22,7 @@ class Payment extends Model
 public function get_unpaid_payments_all(){
         return DB::table('payments as p')->select('p.link', 'p.comments', 'p.updated_at', 'p.amount', 'p.customeremail', 'p.customerphone', 'p.paymenttype', 'u.name as agent_name', 'b.name as brand_name')->join('brands as b', 'b.id', 'p.brand')->join('users as u', 'u.id', 'p.agent')->where('p.is_paid', 0)->orderBy('p.created_at', 'desc')->get();
     }
-    
+
     public function get_paid_payments_by_user(){
         return DB::table('payments as p')->select('p.id', 'p.comments', 'p.updated_at', 'p.amount', 'p.customeremail', 'p.customerphone', 'p.paymenttype', 'u.name as agent_name', 'b.name as brand_name')->join('brands as b', 'b.id', 'p.brand')->join('users as u', 'u.id', 'p.agent')->where('p.is_paid', 1)->where('u.id', Auth::user()->id)->orderBy('p.id', 'desc')->get();
     }
