@@ -1,68 +1,152 @@
-@extends('layouts.app')
+@extends('master')
+@section('admin-dashboard')
+    <section class="dashboardWrap">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1 pad-zero">
+                    @include('includes.sidebar')
+                </div>
+                <div class="col-md-11 pad-zero">
+                    <div class="dashboardheader">
+                        <div class="container">
+                            <div class="header">
+                                @include('includes.header')
+                            </div>
+
+                            @can('show-main-amount')
+                                <div class="mainamount">
+                                    <span>This Month</span>
+                                    <h4 id="my-element"></h4>
+                                </div>
+                            @endcan
+
+                            <div class="celebration" style="z-index: -1 !important">
+                                <div class="imgg1">
+                                    <img class="sales-image" src="{{ Asset('public/assets/images/fireworks.gif') }}"
+                                        style="display:none;">
+                                </div>
+                                <div class="imgg2">
+                                    <img class="sales-image" src="{{ Asset('public/assets/images/celeb.gif') }}"
+                                        style="display:none;">
+                                </div>
+                                <div class="imgg3">
+                                    <img class="sales-image" src="{{ Asset('public/assets/images/fireworks.gif') }}"
+                                        style="display:none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mainWrap">
+                        <div class="container">
+                            <div class="adduser" style="margin-top: 10px">
+                                <div class="row">
+                                    <div class="col-lg-12 margin-tb d-flex" style="justify-content: space-between">
+                                        <div class="pull-left">
+                                            <h2 style="font-size: 30px; font-weight: bold">Edit User</h2>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back </a>
+                                        </div>
+                                    </div>
+                                </div>
 
 
-@section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Edit New User</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back </a>
-        </div>
-    </div>
-</div>
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger mt-6">
+                                        <strong>Whoops!</strong> Something went wrong.<br><br>
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
 
-@if (count($errors) > 0)
-  <div class="alert alert-danger">
-    <strong>Whoops!</strong> Something went wrong.<br><br>
-    <ul>
-       @foreach ($errors->all() as $error)
-         <li>{{ $error }}</li>
-       @endforeach
-    </ul>
-  </div>
-@endif
+                                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
+                                <div class="row mt-3">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="addfield">
+                                            <strong>Name:</strong>
+                                            {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control mt-2']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="addfield">
+                                            <strong>Email:</strong>
+                                            {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control mt-2']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="addfield">
+                                            <strong>Password:</strong>
+                                            {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control mt-2']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="addfield">
+                                            <strong>Confirm Password:</strong>
+                                            {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control mt-2']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="addfield">
+                                            <strong>Role:</strong>
+                                            {!! Form::select('roles[]', $roles, $userRole, ['class' => 'form-control mt-2', 'multiple']) !!}
+                                        </div>
+                                    </div>
+                                        <button type="submit">Submit</button>
+                                </div>
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    @include('includes.scripts')
+    <script>
+        <?php
+        $salesTarget = $target[0]->target;
+        $currentSales = $month[0]->amount == '' ? 0 : $month[0]->amount;
+        ?>
+        $('#leadsTable').DataTable();
+        $('#leadsTable2').DataTable();
+        var salesTarget = <?php echo $salesTarget; ?>;
 
+        function checkSales() {
+            var currentSales = <?php echo $currentSales; ?>;
+            var currentSalesWithDollorSign = '$' + currentSales;
+            $('#my-element').html(currentSalesWithDollorSign);
 
-{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Email:</strong>
-            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Password:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Confirm Password:</strong>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
-{!! Form::close() !!}
+            if (currentSales >= salesTarget) {
+                $('.sales-image').css('display', 'block');
+            } else {}
+        }
+        checkSales();
+        $('.menu-Bar').click(function() {
+            $(this).toggleClass('open');
+            $('.menuWrap').toggleClass('open');
+            $('body').toggleClass('ovr-hiddn');
+        });
+        $('.copyLink').click(function() {
+            var value = $(this).attr('data');
 
+            // Create a temporary input element
+            var tempInput = $('<input>');
+            $('body').append(tempInput);
 
+            // Set the input value to your variable value
+            tempInput.val(value);
+
+            // Select the input content
+            tempInput.select();
+
+            // Execute the copy command
+            document.execCommand('copy');
+
+            // Remove the temporary input element
+            tempInput.remove();
+        })
+    </script>
 @endsection

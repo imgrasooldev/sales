@@ -20,6 +20,12 @@
          @can('sale-list')
              <li><a href="{{ Route('sales.index') }}"><i  class="fas fa-hand-holding-usd" aria-hidden="true"></i></a></li>
          @endcan
+         @can('user-list')
+             <li><a href="{{ Route('users.index') }}"><i  class="fas fa-user" aria-hidden="true"></i></a></li>
+         @endcan
+         @can('role-list')
+            <li><a href="{{ Route('roles.index') }}"><i  class="fas fa-user-edit" aria-hidden="true"></i></a></li>
+         @endcan
          <li>
              <a href="index.php">
                 <form method="POST" action="{{ route('logout') }}">

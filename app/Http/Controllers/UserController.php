@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Payment;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -14,6 +15,7 @@ use Illuminate\Support\Arr;
 class UserController extends Controller
 {
     private $user = null;
+    private $payment = null;
     private $brand = null;
 
     function __construct()
@@ -25,13 +27,16 @@ class UserController extends Controller
 
         $this->user = new User();
         $this->brand = new Brand();
+        $this->payment = new Payment();
     }
 
 
     public function index(Request $request)
     {
         $data = User::orderBy('id', 'DESC')->paginate(5);
-        return view('users.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $month = $this->payment->month();
+        $target = $this->user->target();
+        return view('users.index', compact('data', 'month', 'target'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create()
@@ -72,16 +77,20 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        $month = $this->payment->month();
+        $target = $this->user->target();
+        return view('users.show', compact('user', 'target', 'month'));
     }
 
     public function edit($id)
     {
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
+        $month = $this->payment->month();
+        $target = $this->user->target();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view('users.edit', compact('user', 'roles', 'userRole', 'month', 'target'));
     }
 
     public function update(Request $request, $id)
