@@ -20,7 +20,7 @@
          @can('sale-list')
              <li><a href="{{ Route('sales.index') }}"><i  class="fas fa-hand-holding-usd" aria-hidden="true"></i></a></li>
          @endcan
-         @can('user-list')
+         @can('user-create')
              <li><a href="{{ Route('users.index') }}"><i  class="fas fa-user" aria-hidden="true"></i></a></li>
          @endcan
          @can('role-list')
