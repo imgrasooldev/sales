@@ -18,15 +18,15 @@
                             </div> --}}
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ Asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ Asset('public/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ Asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>

@@ -54,7 +54,8 @@ class ProfileController extends Controller
         $user_brand = $this->user_brand->get_brands($id);
         $team = $this->user->team($id);
         $team_sale = $this->user->team_sale($id);
-        return view('profile.show', compact('user', 'today', 'month', 'un_paid', 'year', 'user_brand', 'team', 'team_sale'));
+        $payments = $this->payment->get_paid_payments_by_user();
+        return view('profile.show', compact('user', 'payments', 'today', 'month', 'un_paid', 'year', 'user_brand', 'team', 'team_sale'));
     }
 
     public function edit($id)

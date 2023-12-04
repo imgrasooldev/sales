@@ -22,15 +22,15 @@
 
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ Asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ Asset('public/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ Asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>
@@ -136,12 +136,30 @@
                                                         <tr>
                                                             <td scope="row">
                                                                 <span>
-                                                                    <a href="{{ Route('profile.show', $check_user->id) }}">
-                                                                        <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ Asset('public/profiles/' . $user->profile_image) }}"
-                                                                            alt="{{ $user->name }} {{ $user->last_name }}"
-                                                                            title="{{ $user->name }} {{ $user->last_name }}">
-                                                                    </a>
+                                                                    @can('show-self-profile')
+                                                                        @if (Auth::user()->id == $check_user->id)
+                                                                            <a href="{{ Route('profile.show', $check_user->id) }}">
+                                                                                <img style="width: 100px; height: 100px; border-radius: 50%"
+                                                                                    src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                    alt="{{ $user->name }} {{ $user->last_name }}"
+                                                                                    title="{{ $user->name }} {{ $user->last_name }}">
+                                                                            </a>
+                                                                        @else
+                                                                            <img style="width: 100px; height: 100px; border-radius: 50%"
+                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                alt="{{ $user->name }} {{ $user->last_name }}"
+                                                                                title="{{ $user->name }} {{ $user->last_name }}">
+                                                                        @endif
+                                                                    @endcan
+
+                                                                    @can('show-all-profiles')
+                                                                        <a href="{{ Route('profile.show', $check_user->id) }}">
+                                                                            <img style="width: 100px; height: 100px; border-radius: 50%"
+                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                alt="{{ $user->name }} {{ $user->last_name }}"
+                                                                                title="{{ $user->name }} {{ $user->last_name }}">
+                                                                        </a>
+                                                                    @endcan
                                                                 </span>
                                                                 {{ $user->name }} {{ $user->last_name }}
                                                             </td>
@@ -184,12 +202,29 @@
                                                     <tr>
                                                         <td scope="row">
                                                             <span>
-                                                                <a href="{{ Route('profile.show', $check_user->id) }}">
-                                                                    <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                        src="{{ Asset('public/profiles/' . $check_user->profile_image) }}"
-                                                                        alt="{{ $check_user->name }} {{ $check_user->last_name }}"
-                                                                        title="{{ $check_user->name }} {{ $check_user->last_name }}">
-                                                                </a>
+                                                                @can('show-all-profiles')
+                                                                    <a href="{{ Route('profile.show', $check_user->id) }}">
+                                                                        <img style="width: 100px; height: 100px; border-radius: 50%"
+                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                            alt="{{ $check_user->name }} {{ $check_user->last_name }}"
+                                                                            title="{{ $check_user->name }} {{ $check_user->last_name }}">
+                                                                    </a>
+                                                                @endcan
+                                                                @can('show-self-profile')
+                                                                    @if (Auth::user()->id == $check_user->id)
+                                                                        <a href="{{ Route('profile.show', $check_user->id) }}">
+                                                                            <img style="width: 100px; height: 100px; border-radius: 50%"
+                                                                                src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                                alt="{{ $check_user->name }} {{ $check_user->last_name }}"
+                                                                                title="{{ $check_user->name }} {{ $check_user->last_name }}">
+                                                                        </a>
+                                                                    @else
+                                                                        <img style="width: 100px; height: 100px; border-radius: 50%"
+                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                            alt="{{ $check_user->name }} {{ $check_user->last_name }}"
+                                                                            title="{{ $check_user->name }} {{ $check_user->last_name }}">
+                                                                    @endif
+                                                                @endcan
                                                             </span>
                                                             {{ $check_user->name }} {{ $check_user->last_name }}
                                                         </td>
@@ -207,6 +242,7 @@
                                     </table>
                                 </div>
                             @endcan
+
 
                             @can('brand-list')
                                 <div class="salesusers">
@@ -233,7 +269,7 @@
                                                                 <span>
                                                                     <a href="{{ Route('brands.edit', $brand->id) }}">
                                                                         <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                            src="{{ Asset('public/images/' . $brand->image) }}"
+                                                                            src="{{ asset('public/images/' . $brand->image) }}"
                                                                             alt="{{ $brand->name }}"
                                                                             title="{{ $brand->name }}">
                                                                     </a>
@@ -251,7 +287,7 @@
                                                             <span>
                                                                 <a href="">
                                                                     <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                        src="{{ Asset('public/images/' . $check_brand->image) }}"
+                                                                        src="{{ asset('public/images/' . $check_brand->image) }}"
                                                                         alt="{{ $check_brand->name }}"
                                                                         title="{{ $check_brand->name }}">
                                                                 </a>
@@ -397,8 +433,9 @@
                                                     <td>{{ $payment->agent_name }}</td>
                                                     <td>{{ $payment->brand_name }}</td>
                                                     <td><button class="copyLink"
-                                                        data="https://pay.amazelogo.com/payment/<?php echo $payment->link; ?>">Payment
-                                                        Link</button></td>                                                </tr>
+                                                            data="https://pay.amazelogo.com/payment/<?php echo $payment->link; ?>">Payment
+                                                            Link</button></td>
+                                                </tr>
                                                 @php
                                                     $counter++;
                                                 @endphp

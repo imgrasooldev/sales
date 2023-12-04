@@ -19,143 +19,143 @@
                             <div class="row">
                                 @if ($user->type == 1)
                                     <div class="col-md-9">
-                                @else
-                                    <div class="col-md-12">
+                                    @else
+                                        <div class="col-md-12">
                                 @endif
-                                    <h3>{{ $user->name }} {{ $user->last_name }}</h3>
-                                    <ul class="userdesig">
-                                        <li>{{ $user->position }}</li>
-                                        <li>
+                                <h3>{{ $user->name }} {{ $user->last_name }}</h3>
+                                <ul class="userdesig">
+                                    <li>{{ $user->position }}</li>
+                                    <li>
+                                        @php
+                                            $counter = 0;
+                                        @endphp
+                                        @foreach ($user_brand as $brand)
+                                            @if ($counter >= 1)
+                                                {{ ' | ' }}
+                                            @endif
+                                            {{ $brand->name }}
                                             @php
-                                                $counter = 0;
+                                                $counter++;
                                             @endphp
-                                            @foreach ($user_brand as $brand)
-                                                @if ($counter >= 1)
-                                                    {{ ' | ' }}
-                                                @endif
-                                                {{ $brand->name }}
-                                                @php
-                                                    $counter++;
-                                                @endphp
-                                            @endforeach
-                                        </li>
-                                    </ul>
-                                    <div class="userinfo">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="profimg">
-                                                    <img style="width: 100%"
-                                                        src="{{ Asset('public/profiles/' . $user->profile_image) }}"
-                                                        alt="{{ $user->name }} {{ $user->last_name }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <ul>
-                                                    <li>
-                                                        <span>Full Name</span>
-                                                        <h6>{{ $user->name }} {{ $user->last_name }}</h6>
-                                                    </li>
-                                                    <li>
-                                                        <span>Email</span>
-                                                        <h6>{{ $user->email }}</h6>
-                                                    </li>
-                                                    <li>
-                                                        <span>Phone Number</span>
-                                                        <h6>{{ $user->phone }}</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <ul class="padleft">
-                                                    <li>
-                                                        <span>Date Of Joining</span>
-                                                        <h6>{{ $user->join_date }}</h6>
-                                                    </li>
-                                                    <li>
-                                                        <span>Title</span>
-                                                        <h6>{{ $user->position }}</h6>
-                                                    </li>
-                                                    <li>
-                                                        <span>Pseudo Name</span>
-                                                        <h6>{{ $user->pseudo_name }}</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <ul>
-                                                    <li>
-                                                        <span>Country</span>
-                                                        <h6>{{ $user->country }}</h6>
-                                                    </li>
-                                                    <li>
-                                                        <span>Address</span>
-                                                        <h6>{{ $user->address }}</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    </li>
+                                </ul>
+                                <div class="userinfo">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="usertargets">
-                                                <ul>
-                                                    <li>
-                                                        <span>Today Sales</span>
-                                                        <h6>${{ number_format($today[0]->amount) }}</h6>
-                                                        <span>{{ date('D, d M Y') }}</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Monthly Sales</span>
-                                                        <h6>${{ number_format($month[0]->amount) }}</h6>
-                                                        <span>{{ date('M') }} {{ date('Y') }}</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Yearly Sales</span>
-                                                        <h6>${{ number_format($year[0]->amount) }}</h6>
-                                                        <span>{{ date('M, Y') }}</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Unpaid Leads</span>
-                                                        <h6>${{ number_format($un_paid[0]->amount) }}</h6>
-                                                        <span>{{ date('Y') }}</span>
-                                                    </li>
-                                                </ul>
+                                            <div class="profimg">
+                                                <img style="width: 100%"
+                                                    src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                    alt="{{ $user->name }} {{ $user->last_name }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
-                                            <div class="useroverview">
-                                                <h5>Sales Overview</h5>
-                                                <canvas id="myChart"></canvas>
-                                            </div>
+                                        <div class="col-md-3">
+                                            <ul>
+                                                <li>
+                                                    <span>Full Name</span>
+                                                    <h6>{{ $user->name }} {{ $user->last_name }}</h6>
+                                                </li>
+                                                <li>
+                                                    <span>Email</span>
+                                                    <h6>{{ $user->email }}</h6>
+                                                </li>
+                                                <li>
+                                                    <span>Phone Number</span>
+                                                    <h6>{{ $user->phone }}</h6>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <ul class="padleft">
+                                                <li>
+                                                    <span>Date Of Joining</span>
+                                                    <h6>{{ $user->join_date }}</h6>
+                                                </li>
+                                                <li>
+                                                    <span>Title</span>
+                                                    <h6>{{ $user->position }}</h6>
+                                                </li>
+                                                <li>
+                                                    <span>Pseudo Name</span>
+                                                    <h6>{{ $user->pseudo_name }}</h6>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <ul>
+                                                <li>
+                                                    <span>Country</span>
+                                                    <h6>{{ $user->country }}</h6>
+                                                </li>
+                                                <li>
+                                                    <span>Address</span>
+                                                    <h6>{{ $user->address }}</h6>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="usertargets">
+                                            <ul>
+                                                <li>
+                                                    <span>Today Sales</span>
+                                                    <h6>${{ number_format($today[0]->amount) }}</h6>
+                                                    <span>{{ date('D, d M Y') }}</span>
+                                                </li>
+                                                <li>
+                                                    <span>Monthly Sales</span>
+                                                    <h6>${{ number_format($month[0]->amount) }}</h6>
+                                                    <span>{{ date('M') }} {{ date('Y') }}</span>
+                                                </li>
+                                                <li>
+                                                    <span>Yearly Sales</span>
+                                                    <h6>${{ number_format($year[0]->amount) }}</h6>
+                                                    <span>{{ date('M, Y') }}</span>
+                                                </li>
+                                                <li>
+                                                    <span>Unpaid Leads</span>
+                                                    <h6>${{ number_format($un_paid[0]->amount) }}</h6>
+                                                    <span>{{ date('Y') }}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="useroverview">
+                                            <h5>Sales Overview</h5>
+                                            <canvas id="myChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 @if ($user->type == 1)
                                     <div class="otheragents">
-                                @else
-                                    <div class="otheragents" hidden>
+                                    @else
+                                        <div class="otheragents" hidden>
                                 @endif
-                                        @foreach ($team as $member)
-                                            <div class="relbox">
-                                                <h4>{{ $member->name }} {{ $member->last_name }}</h4>
-                                                <ul class="otherusersdesig">
-                                                    <li>{{ $member->position }}</li>
-                                                    {{-- <li>Amaze Logo</li> --}}
-                                                </ul>
-                                                <ul class="scalelst">
-                                                    <li>
-                                                        <span>Team Sale</span>
-                                                        <h6>{{ number_format($team_sale[0]->amount+$month[0]->amount) }}</h6>
-                                                    </li>
-                                                    <li>
-                                                        <span>Individual</span>
-                                                        <h6>{{ number_format($member->amount) }}</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        @endforeach
-                                        {{-- <div class="relbox">
+                                @foreach ($team as $member)
+                                    <div class="relbox">
+                                        <h4>{{ $member->name }} {{ $member->last_name }}</h4>
+                                        <ul class="otherusersdesig">
+                                            <li>{{ $member->position }}</li>
+                                            {{-- <li>Amaze Logo</li> --}}
+                                        </ul>
+                                        <ul class="scalelst">
+                                            <li>
+                                                <span>Team Sale</span>
+                                                <h6>{{ number_format($team_sale[0]->amount + $month[0]->amount) }}</h6>
+                                            </li>
+                                            <li>
+                                                <span>Individual</span>
+                                                <h6>{{ number_format($member->amount) }}</h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+                                {{-- <div class="relbox">
                                             <h4>Hammad Alee</h4>
                                             <ul class="otherusersdesig">
                                                 <li>Sr. UpSeller</li>
@@ -206,13 +206,94 @@
                                                 </li>
                                             </ul>
                                         </div> --}}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
+
+                    @can('user-self-paid-leads')
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+                        <div class="row pt-12">
+                            <p style="font-size: 24px; font-weight: bold;">User Paid Leads</p>
+                            <table id="leadsTable" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Sr #</th>
+                                        <th>PDF Invoice</th>
+                                        <th>Date / Time</th>
+                                        <th>Client Email</th>
+                                        <th>Client Phone</th>
+                                        <th>Comment</th>
+                                        <th>Invoice Type</th>
+                                        <th>Amount</th>
+                                        <th>Agent</th>
+                                        <th>Brand</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $counter = 1;
+                                    @endphp
+
+                                    @foreach ($payments as $payment)
+                                            @if (str_word_count($payment->comments) > 3)
+                                                @php
+                                                    $commentsWithoutDots = implode(' ', array_slice(str_word_count($payment->comments, 1), 0, 3));
+                                                    $comments = $commentsWithoutDots . '...';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $comments = $payment->comments;
+                                                @endphp
+                                            @endif
+
+                                            <tr>
+                                                <td>{{ $counter }}</td>
+                                                <td><a href="{{ Route('pdf', $payment->id) }}">Download</a></td>
+                                                <td>{{ $payment->updated_at }}</td>
+                                                <td><a
+                                                        href="mailto:{{ $payment->customeremail }}">{{ $payment->customeremail }}</a>
+                                                </td>
+                                                <td><a
+                                                        href="tel:+{{ $payment->customerphone }}">{{ $payment->customerphone }}</a>
+                                                </td>
+                                                <td data-toggle="tooltip" data-placement="bottom"
+                                                    title="{{ ucwords($payment->comments) }}">{{ ucwords($comments) }}
+                                                </td>
+                                                <td>{{ $payment->paymenttype }}</td>
+                                                <td>{{ $payment->amount }}</td>
+                                                <td>{{ $payment->agent_name }}</td>
+                                                <td>{{ $payment->brand_name }}</td>
+                                            </tr>
+                                            @php
+                                                $counter++;
+                                            @endphp
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Sr #</th>
+                                        <th>PDF Invoice</th>
+                                        <th>Date / Time</th>
+                                        <th>Client Email</th>
+                                        <th>Client Phone</th>
+                                        <th>Comment</th>
+                                        <th>Invoice Type</th>
+                                        <th>Amount</th>
+                                        <th>Agent</th>
+                                        <th>Brand</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    @endcan
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </section>
 
@@ -299,7 +380,6 @@
             $('.menuWrap').toggleClass('open');
             $('body').toggleClass('ovr-hiddn');
         });
-
     </script>
     </body>
 
