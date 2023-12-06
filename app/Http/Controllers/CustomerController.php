@@ -29,7 +29,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::select('customers.*', 'b.name as brand')->join('brands as b', 'b.id', 'customers.brand')->orderBy('customers.id', 'desc')->get();
         $brands = Brand::all();
         return view('customers.index', compact('customers', 'brands'));
     }

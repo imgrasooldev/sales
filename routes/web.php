@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -28,6 +30,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('customers', CustomerController::class);
     Route::resource('sales', SaleController::class);
     Route::resource('profile', ProfileController::class);
+    Route::resource('comment', CommentController::class);
 
     Route::get('chart', [HomeController::class, 'chart'])->name('chart');
     Route::get('download-pdf/{id}', [HomeController::class,'generatePdf'])->name('pdf');

@@ -53,7 +53,7 @@ class SaleController extends Controller
     public function show($id)
     {
         $email = Customer::find($id);
-        $sales = DB::table('customers')->where('email', $email->email)->orderBy('date', 'desc')->get();
+        $sales = DB::table('customers as c')->select('c.*', 'b.name as brand')->join('brands as b', 'b.id', 'c.brand')->where('email', $email->email)->orderBy('date', 'desc')->get();
         return view('sales.show', compact('sales'));
     }
 

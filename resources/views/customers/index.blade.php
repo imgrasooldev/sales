@@ -36,15 +36,15 @@
                             </div> --}}
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>
@@ -106,6 +106,7 @@
                                             <th>Assigned PM</th>
                                             <th>Project Status</th>
                                             <th>Calling</th>
+                                            <th>Comment</th>
                                         </tr>
                                     </thead>
                                     <tbody id="customerData">
@@ -130,6 +131,10 @@
                                                 <td>{{ $customer->assigned_pm }}</td>
                                                 <td>{{ $customer->project_status }}</td>
                                                 <td>{{ $customer->calling }}</td>
+                                                <td>
+                                                    <a href="{{ Route('comment.create', 'id='.$customer->id) }}" class="btn btn-success">Add</a>
+                                                    <a href="{{ Route('comment.show', 'id='.$customer->id) }}" class="btn btn-info mt-2" style="background: rgb(110, 110, 249)">Show</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

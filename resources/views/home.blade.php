@@ -22,15 +22,15 @@
 
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>
@@ -140,13 +140,13 @@
                                                                         @if (Auth::user()->id == $check_user->id)
                                                                             <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                                 <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                    src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                    src="{{ asset('/profiles/' . $user->profile_image) }}"
                                                                                     alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                     title="{{ $user->name }} {{ $user->last_name }}">
                                                                             </a>
                                                                         @else
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                src="{{ asset('/profiles/' . $user->profile_image) }}"
                                                                                 alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                 title="{{ $user->name }} {{ $user->last_name }}">
                                                                         @endif
@@ -155,7 +155,7 @@
                                                                     @can('show-all-profiles')
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                src="{{ asset('/profiles/' . $user->profile_image) }}"
                                                                                 alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                 title="{{ $user->name }} {{ $user->last_name }}">
                                                                         </a>
@@ -205,7 +205,7 @@
                                                                 @can('show-all-profiles')
                                                                     <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                         <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                            src="{{ asset('/profiles/' . $check_user->profile_image) }}"
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     </a>
@@ -214,13 +214,13 @@
                                                                     @if (Auth::user()->id == $check_user->id)
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                                src="{{ asset('/profiles/' . $check_user->profile_image) }}"
                                                                                 alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                                 title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                         </a>
                                                                     @else
                                                                         <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                            src="{{ asset('/profiles/' . $check_user->profile_image) }}"
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     @endif
@@ -269,7 +269,7 @@
                                                                 <span>
                                                                     <a href="{{ Route('brands.edit', $brand->id) }}">
                                                                         <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                            src="{{ asset('public/images/' . $brand->image) }}"
+                                                                            src="{{ asset('/images/' . $brand->image) }}"
                                                                             alt="{{ $brand->name }}"
                                                                             title="{{ $brand->name }}">
                                                                     </a>
@@ -287,7 +287,7 @@
                                                             <span>
                                                                 <a href="">
                                                                     <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                        src="{{ asset('public/images/' . $check_brand->image) }}"
+                                                                        src="{{ asset('/images/' . $check_brand->image) }}"
                                                                         alt="{{ $check_brand->name }}"
                                                                         title="{{ $check_brand->name }}">
                                                                 </a>
