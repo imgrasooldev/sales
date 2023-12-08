@@ -42,7 +42,7 @@ body {
       <td>
     </tr>
   </table>
-  </div> 
+  </div>
     <div class="width: 100%; text-align: center;">
       <table style="width: 85%; margin-top: 40px; margin-left: 60px;border-spacing:0px;">
         <thead style="background-color: #3b9d91;">

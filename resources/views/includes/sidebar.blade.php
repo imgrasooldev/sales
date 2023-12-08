@@ -26,6 +26,8 @@
          @can('role-list')
             <li><a href="{{ Route('roles.index') }}"><i  class="fas fa-user-edit" aria-hidden="true"></i></a></li>
          @endcan
+            <li><a href="{{ Route('calendar.index') }}"><i  class="fas fa-calendar" aria-hidden="true"></i></a></li>
+
          <li>
              <a href="index.php">
                 <form method="POST" action="{{ route('logout') }}">

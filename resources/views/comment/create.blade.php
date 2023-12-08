@@ -97,7 +97,7 @@
                                     <div class="col-md-12">
                                         <div class="addfield">
                                             <label>Comment</label>
-                                            <textarea name="commnet" required class="form-control" placeholder="Write Comment"></textarea>
+                                            <textarea name="title" required class="form-control" placeholder="Write Comment"></textarea>
                                             @if ($errors->has('email'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
                                                     {{ $errors->first('email') }}</p>

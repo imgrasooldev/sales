@@ -132,8 +132,8 @@
                                                 <td>{{ $customer->project_status }}</td>
                                                 <td>{{ $customer->calling }}</td>
                                                 <td>
-                                                    <a href="{{ Route('comment.create', 'id='.$customer->id) }}" class="btn btn-success">Add</a>
-                                                    <a href="{{ Route('comment.show', 'id='.$customer->id) }}" class="btn btn-info mt-2" style="background: rgb(110, 110, 249)">Show</a>
+                                                    <a href="{{ Route('comment.create', $customer->id) }}" class="btn btn-success">Add</a>
+                                                    <a href="{{ Route('comment.show', $customer->id) }}" class="btn btn-info mt-2" style="background: rgb(110, 110, 249)">Show</a>
                                                 </td>
                                             </tr>
                                         @endforeach

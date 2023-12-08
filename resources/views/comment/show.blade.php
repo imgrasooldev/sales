@@ -69,7 +69,7 @@
                                         @foreach ($comment as $item)
                                             <tr>
                                                 <td>{{ $count++ }}</td>
-                                                <td>{{ $item->comment }}</td>
+                                                <td>{{ $item->title }}</td>
                                                 <td>{{ $item->date }}</td>
                                                 <td>{{ $item->time }}</td>
                                             </tr>

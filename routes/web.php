@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CallendarController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +33,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('sales', SaleController::class);
     Route::resource('profile', ProfileController::class);
     Route::resource('comment', CommentController::class);
+
+    Route::get('fullcalender', [CalendarController::class, 'index'])->name('calendar.index');
+    Route::post('fullcalenderAjax', [CalendarController::class, 'ajax']);
+
 
     Route::get('chart', [HomeController::class, 'chart'])->name('chart');
     Route::get('download-pdf/{id}', [HomeController::class,'generatePdf'])->name('pdf');
