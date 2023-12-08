@@ -33,7 +33,7 @@ class CommentController extends Controller
         $store = new Comment();
         $store->date = $request->date;
         $store->time = $request->time;
-        $store->comment = $request->commnet;
+        $store->title = $request->title;
         $store->lead_id = $request->id;
         $store->user_id = Auth::user()->id;
         $store->save();
@@ -45,7 +45,6 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-
         $comment = Comment::where('lead_id', $id)->orderBy('id', 'desc')->get();
         return view('comment.show', compact('comment'));
     }
