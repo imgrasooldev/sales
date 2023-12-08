@@ -2,59 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Customer;
+use App\Models\Payment;
+use App\Models\User;
+use App\Models\UserBrand;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    private $user = null;
+    private $brand = null;
+    private $payment = null;
+    private $user_brand = null;
+
+    function __construct()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $this->middleware('permission:profile-list|profile-create|profile-edit|profile-delete', ['only' => ['index', 'store', 'show']]);
+        $this->middleware('permission:profile-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:profile-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:profile-delete', ['only' => ['destroy']]);
+        $this->user = new User();
+        $this->brand = new Brand();
+        $this->payment = new Payment();
+        $this->user_brand = new UserBrand();}
+
+    public function index(Request $request)
+    {
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function create()
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+    }
 
-        $user = $request->user();
+    public function show($id)
+    {
+        $user = $this->user->find_user($id);
+        $today = $this->user->today($id);
+        $month = $this->user->month($id);
+        $un_paid = $this->user->un_paid($id);
+        $year = $this->user->year($id);
+        $user_brand = $this->user_brand->get_brands($id);
+        $team = $this->user->team($id);
+        $team_sale = $this->user->team_sale($id);
+        $payments = $this->payment->get_paid_payments_by_user();
+        return view('profile.show', compact('user', 'payments', 'today', 'month', 'un_paid', 'year', 'user_brand', 'team', 'team_sale'));
+    }
 
-        Auth::logout();
+    public function edit($id)
+    {
+    }
 
-        $user->delete();
+    public function update(Request $request, $id)
+    {
+    }
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+    public function destroy($id)
+    {
     }
 }
