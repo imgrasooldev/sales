@@ -20,8 +20,7 @@ class CalendarController extends Controller
              return response()->json($data);
         }
 
-        $customers = Payment::latest()->get();
-        // dd($customers);
+        $customers = Payment::latest()->groupby('customeremail')->get();
         return view('calendar.index', compact('customers'));
     }
 
@@ -34,11 +33,12 @@ class CalendarController extends Controller
     {
         switch ($request->type) {
            case 'add':
+              $email = Payment::find($request->customer_id);
               $event = Comment::create([
                   'title' => $request->title,
                   'date' => $request->start,
                   'user_id' => Auth::user()->id,
-                  'lead_id' => $request->customer_id,
+                  'lead_id' => $email->customeremail,
                   'time' => $request->time,
                   'visibility' => $request->visibility
               ]);
@@ -47,11 +47,12 @@ class CalendarController extends Controller
              break;
 
            case 'update':
+              $email = Payment::find($request->customer_id);
               $event = Comment::find($request->id)->update([
                   'title' => $request->title,
                   'date' => $request->start,
                   'user_id' => Auth::user()->id,
-                  'lead_id' => $request->customer_id
+                  'lead_id' => $email->customeremail
               ]);
 
               return response()->json($event);

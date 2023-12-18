@@ -31,11 +31,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $email = Payment::find($request->id);
         $store = new Comment();
         $store->date = $request->date;
         $store->time = $request->time;
         $store->title = $request->title;
-        $store->lead_id = $request->id;
+        $store->lead_id = $email->customeremail;
         $store->user_id = Auth::user()->id;
         $store->visibility = $request->visibility;
         $store->save();
@@ -47,7 +48,8 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $comment = Comment::join('users as u', 'u.id', 'comments.user_id', 'comments.create_at as create_at')->where('lead_id', $id)->orderBy('comments.id', 'desc')->get();
+        $email = Payment::find($id);
+        $comment = Comment::join('users as u', 'u.id', 'comments.user_id', 'comments.create_at as create_at')->where('lead_id', $email->customeremail)->orderBy('comments.id', 'desc')->get();
         return view('comment.show', compact('comment'));
     }
 

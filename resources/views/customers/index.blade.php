@@ -51,9 +51,9 @@
                         </div>
                     </div>
                     <div class="mainWrap">
-                        @can('customer-create')
+                        <!-- @can('customer-create')
                             <a href="{{ Route('customers.create') }}" style="margin: 10px" class="btn btn-success">New Customer</a>
-                        @endcan
+                        @endcan -->
                         <div style="margin: 10px" class="">
                             <div class="allpaid">
                                 <div style="display: flex; justify-content: space-between">

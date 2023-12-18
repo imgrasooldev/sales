@@ -30,7 +30,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Payment::select('payments.*', 'b.name as brand')->join('brands as b', 'b.id', 'payments.brand')->orderBy('payments.id', 'desc')->get();
+        $customers = Payment::select('payments.*', 'b.name as brand')->join('brands as b', 'b.id', 'payments.brand')->orderBy('payments.id', 'desc')->groupBy('customeremail')->get();
         $brands = Brand::all();
         return view('customers.index', compact('customers', 'brands'));
     }
