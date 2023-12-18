@@ -210,7 +210,7 @@
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     </a>
                                                                 @endcan
-                                                                @can('show-self-profile')
+                                                                {{-- @can('show-self-profile')
                                                                     @if (Auth::user()->id == $check_user->id)
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
@@ -224,7 +224,7 @@
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     @endif
-                                                                @endcan
+                                                                @endcan --}}
                                                             </span>
                                                             {{ $check_user->name }} {{ $check_user->last_name }}
                                                         </td>

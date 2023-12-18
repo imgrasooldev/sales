@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Customer;
+use App\Models\Payment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::select('customers.*', 'b.name as brand')->join('brands as b', 'b.id', 'customers.brand')->orderBy('customers.id', 'desc')->get();
+        $customers = Payment::select('payments.*', 'b.name as brand')->join('brands as b', 'b.id', 'payments.brand')->orderBy('payments.id', 'desc')->get();
         $brands = Brand::all();
         return view('customers.index', compact('customers', 'brands'));
     }
@@ -53,7 +54,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $new = Customer::create($request->only([
+        $new = Payment::create($request->only([
             'date',
             'brand',
             'customer_name',

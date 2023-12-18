@@ -101,11 +101,12 @@
                                             <th>Amount</th>
                                             <th>Remaining</th>
                                             <th>Agent</th>
-                                            <th>Assigned To</th>
-                                            <th>Welcome Email</th>
-                                            <th>Assigned PM</th>
-                                            <th>Project Status</th>
-                                            <th>Calling</th>
+
+                                            {{-- <th>Assigned To</th> --}}
+                                            {{-- <th>Welcome Email</th> --}}
+                                            {{-- <th>Assigned PM</th> --}}
+                                            {{-- <th>Project Status</th> --}}
+                                            {{-- <th>Calling</th> --}}
                                             <th>Comment</th>
                                         </tr>
                                     </thead>
@@ -119,20 +120,20 @@
                                                 <td>{{ $customer->date }}</td>
                                                 <td>{{ $customer->brand }}</td>
                                                 <td>{{ $customer->customer_name }}</td>
-                                                <td>{{ $customer->phone_number }}</td>
-                                                <td>{{ $customer->email }}</td>
+                                                <td>{{ $customer->customerphone }}</td>
+                                                <td>{{ $customer->customeremail }}</td>
                                                 <td>{{ $customer->bussiness_name }}</td>
                                                 <td>{{ $customer->package }}</td>
                                                 <td>{{ $customer->amount }}</td>
-                                                <td>{{ $customer->remaining }}</td>
+                                                <td>{{ $customer->remanining }}</td>
                                                 <td>{{ $customer->agent }}</td>
-                                                <td>{{ $customer->assigned_to }}</td>
-                                                <td>{{ $customer->welcome_email }}</td>
-                                                <td>{{ $customer->assigned_pm }}</td>
-                                                <td>{{ $customer->project_status }}</td>
-                                                <td>{{ $customer->calling }}</td>
+                                                {{-- <td>{{ $customer->assigned_to }}</td> --}}
+                                                {{-- <td>{{ $customer->welcome_email }}</td> --}}
+                                                {{-- <td>{{ $customer->assigned_pm }}</td> --}}
+                                                {{-- <td>{{ $customer->project_status }}</td> --}}
+                                                {{-- <td>{{ $customer->calling }}</td> --}}
                                                 <td>
-                                                    <a href="{{ Route('comment.create', $customer->id) }}" class="btn btn-success">Add</a>
+                                                    <a href="{{ Route('comment.create', 'id='.$customer->id) }}" class="btn btn-success">Add</a>
                                                     <a href="{{ Route('comment.show', $customer->id) }}" class="btn btn-info mt-2" style="background: rgb(110, 110, 249)">Show</a>
                                                 </td>
                                             </tr>

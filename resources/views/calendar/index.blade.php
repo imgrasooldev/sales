@@ -19,7 +19,6 @@
         .selected {
             background-color: #ffffff;
             /* Change the background color as needed */
-            user-select: text;
         }
     </style>
     <section class="dashboardWrap">
@@ -29,30 +28,34 @@
                     @include('includes.sidebar')
                 </div>
                 <div class="col-md-11 pad-zero">
-                    <div class="dashboardheader">
-                        <div class="container">
-                            <div class="header">
-                                @include('includes.header')
-                            </div>
-                            <div class="celebration">
-                                <div class="imgg1">
-                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
-                                        style="display:none;">
-                                </div>
-                                <div class="imgg2">
-                                    <img class="sales-image" src="{{ asset('/assets/images/celeb.gif') }}"
-                                        style="display:none;">
-                                </div>
-                                <div class="imgg3">
-                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
-                                        style="display:none;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="mainWrap">
                         <div style="margin: 10px" class="">
                             <div class="allpaid">
+                                <div class="row mb-4">
+                                    <div class="col-sm-6">
+                                        <label>Customer</label>
+                                        <input class="form-control" list="browsers" name="browser" id="browser">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Show Alert</label>
+                                        <select name="visibility" class="form-control" id="visibility">
+                                            <option value="0">To Me</option>
+                                            <option value="1">To All</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Show Alert</label>
+                                        <input class="form-control" type="time" id="time"/>
+                                    </div>
+                                </div>
+                                    <datalist style="overflow: scroll" id="browsers">
+                                    @foreach ($customers as $customer)
+                                        <option style="overflow: scroll" value="{{ $customer->id }}">
+                                            {{ $customer->customer_name }} {{ '(' . $customer->customeremail . ')' }} - Amount:
+                                            {{ $customer->amount }} - Date: {{ $customer->date }}</option>
+                                    @endforeach
+                                </datalist>
                                 <div class="container">
                                     <div id='calendar'></div>
                                 </div>
@@ -67,8 +70,19 @@
     {{-- @include('includes.scripts') --}}
     <script>
         $(document).ready(function() {
-
+            var customer_id = null;
+            var time = null;
+            var visibility = null;
             var SITEURL = "{{ url('/') }}";
+            $('#browser').on('change', function() {
+                customer_id = $(this).val()
+            })
+            $('#time').on('change', function() {
+                time = $(this).val()
+            })
+            $('#visibility').on('change', function() {
+                visibility = $(this).val()
+            })
 
             $.ajaxSetup({
                 headers: {
@@ -91,42 +105,50 @@
                 selectable: true,
                 selectHelper: true,
                 select: function(start, end, allDay) {
-                    var title = prompt('Event Title:');
-                    if (title) {
-                        var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                        var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-                        $.ajax({
-                            url: SITEURL + "/fullcalenderAjax",
-                            data: {
-                                title: title,
-                                start: start,
-                                end: end,
-                                type: 'add'
-                            },
-                            type: "POST",
-                            success: function(data) {
-                                displayMessage("Event Created Successfully");
-
-                                calendar.fullCalendar('renderEvent', {
-                                    id: data.id,
+                    if (customer_id != null) {
+                        var title = prompt('Event Title:');
+                        if (title) {
+                            var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                            var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+                            $.ajax({
+                                url: SITEURL + "/fullcalenderAjax",
+                                data: {
+                                    customer_id: customer_id,
+                                    visibility: visibility,
+                                    time: time,
                                     title: title,
                                     start: start,
                                     end: end,
-                                    allDay: allDay
-                                }, true);
+                                    type: 'add'
+                                },
+                                type: "POST",
+                                success: function(data) {
+                                    displayMessage("Event Created Successfully");
 
-                                calendar.fullCalendar('unselect');
-                            }
-                        });
+                                    calendar.fullCalendar('renderEvent', {
+                                        id: data.id,
+                                        title: title,
+                                        start: start,
+                                        end: end,
+                                        allDay: allDay
+                                    }, true);
+
+                                    calendar.fullCalendar('unselect');
+                                }
+                            });
+                        }
+                    }else{
+                        alert('Please Select Customer')
                     }
+
                 },
                 eventDrop: function(event, delta) {
                     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
                     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-
                     $.ajax({
                         url: SITEURL + '/fullcalenderAjax',
                         data: {
+                            customer_id: customer_id,
                             title: event.title,
                             start: start,
                             end: end,
@@ -146,6 +168,7 @@
                             type: "POST",
                             url: SITEURL + '/fullcalenderAjax',
                             data: {
+                                customer_id: customer_id,
                                 id: event.id,
                                 type: 'delete'
                             },
@@ -160,6 +183,8 @@
             });
 
         });
+
+
 
         function displayMessage(message) {
             toastr.success(message, 'Event');

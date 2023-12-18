@@ -50,11 +50,6 @@
                                             <th>Amount</th>
                                             <th>Remaining</th>
                                             <th>Agent</th>
-                                            <th>Assigned To</th>
-                                            <th>Welcome Email</th>
-                                            <th>Assigned PM</th>
-                                            <th>Project Status</th>
-                                            <th>Calling</th>
                                         </tr>
                                     </thead>
                                     <tbody id="customerData">
@@ -67,18 +62,13 @@
                                             <td>{{ $sale->date }}</td>
                                                 <td>{{ $sale->brand }}</td>
                                                 <td>{{ $sale->customer_name }}</td>
-                                                <td>{{ $sale->phone_number }}</td>
-                                                <td>{{ $sale->email }}</td>
+                                                <td>{{ $sale->customerphone }}</td>
+                                                <td>{{ $sale->customeremail }}</td>
                                                 <td>{{ $sale->bussiness_name }}</td>
                                                 <td>{{ $sale->package }}</td>
                                                 <td>{{ $sale->amount }}</td>
-                                                <td>{{ $sale->remaining }}</td>
+                                                <td>{{ $sale->remanining }}</td>
                                                 <td>{{ $sale->agent }}</td>
-                                                <td>{{ $sale->assigned_to }}</td>
-                                                <td>{{ $sale->welcome_email }}</td>
-                                                <td>{{ $sale->assigned_pm }}</td>
-                                                <td>{{ $sale->project_status }}</td>
-                                                <td>{{ $sale->calling }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -95,11 +85,6 @@
                                             <th>Amount</th>
                                             <th>Remaining</th>
                                             <th>Agent</th>
-                                            <th>Assigned To</th>
-                                            <th>Welcome Email</th>
-                                            <th>Assigned PM</th>
-                                            <th>Project Status</th>
-                                            <th>Calling</th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -60,7 +60,7 @@
                                     <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Email</label>
-                                            <input required disabled value="{{ $customer->email }}" name="email"
+                                            <input required disabled value="{{ $customer->customeremail }}" name="email"
                                                 placeholder="Email" type="email">
                                             @if ($errors->has('email'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
@@ -72,7 +72,7 @@
                                     <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Phone</label>
-                                            <input required disabled value="{{ $customer->phone_number }}" name="phone"
+                                            <input required disabled value="{{ $customer->customerphone }}" name="phone"
                                                 placeholder="Phone" disabled type="text">
                                             @if ($errors->has('email'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
@@ -130,6 +130,16 @@
                                                     <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
                                                         {{ $errors->first('email') }}</p>
                                                 @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="addfield">
+                                                <label>Show Alert</label>
+                                                <select name="visibility">
+                                                    <option value="0">To Me</option>
+                                                    <option value="1">To All</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

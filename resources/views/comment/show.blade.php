@@ -57,9 +57,11 @@
                                     <thead>
                                         <tr>
                                             <th>Sr #</th>
+                                            <th>Agent</th>
                                             <th>Comment</th>
                                             <th>Date</th>
                                             <th>Time</th>
+                                            <th>Date / Time</th>
                                         </tr>
                                     </thead>
                                     <tbody id="customerData">
@@ -69,9 +71,11 @@
                                         @foreach ($comment as $item)
                                             <tr>
                                                 <td>{{ $count++ }}</td>
+                                                <td>{{ $item->name." ".$item->last_name}}</td>
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->date }}</td>
                                                 <td>{{ $item->time }}</td>
+                                                <td>{{ $item->created_at }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

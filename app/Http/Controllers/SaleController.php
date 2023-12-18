@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Payment;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
@@ -27,17 +28,17 @@ class SaleController extends Controller
 
     public function index(Request $request)
     {
-        $sales = DB::table('customers')
+        $sales = DB::table('payments')
             ->select(
-                'email',
+                'customeremail as email',
                 DB::raw('SUM(amount) as sum'),
                 DB::raw('MAX(id) as id'),
                 DB::raw('MAX(customer_name) as customer_name'),
                 DB::raw('MAX(date) as date'),
-                DB::raw('MAX(phone_number) as phone_number'),
+                DB::raw('MAX(customerphone) as phone_number'),
                 DB::raw('MAX(bussiness_name) as bussiness_name')
             )
-            ->groupBy('email')
+            ->groupBy('customeremail')
             ->get();
         return view('sales.index', compact('sales'));
     }
@@ -52,8 +53,8 @@ class SaleController extends Controller
 
     public function show($id)
     {
-        $email = Customer::find($id);
-        $sales = DB::table('customers as c')->select('c.*', 'b.name as brand')->join('brands as b', 'b.id', 'c.brand')->where('email', $email->email)->orderBy('date', 'desc')->get();
+        $email = Payment::find($id);
+        $sales = DB::table('payments as c')->select('c.*', 'b.name', 'u.name as agent')->join('users as u', 'u.id', 'agent')->join('brands as b', 'b.id', 'c.brand')->where('customeremail', $email->customeremail)->orderBy('date', 'desc')->get();
         return view('sales.show', compact('sales'));
     }
 

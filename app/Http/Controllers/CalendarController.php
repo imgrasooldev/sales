@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,9 @@ class CalendarController extends Controller
              return response()->json($data);
         }
 
-        return view('calendar.index');
+        $customers = Payment::latest()->get();
+        // dd($customers);
+        return view('calendar.index', compact('customers'));
     }
 
     /**
@@ -29,14 +32,15 @@ class CalendarController extends Controller
      */
     public function ajax(Request $request)
     {
-
         switch ($request->type) {
            case 'add':
               $event = Comment::create([
                   'title' => $request->title,
                   'date' => $request->start,
-                  'user_id' => Auth::user()->id
-                //   'end_date' => $request->end,
+                  'user_id' => Auth::user()->id,
+                  'lead_id' => $request->customer_id,
+                  'time' => $request->time,
+                  'visibility' => $request->visibility
               ]);
 
               return response()->json($event);
@@ -46,7 +50,8 @@ class CalendarController extends Controller
               $event = Comment::find($request->id)->update([
                   'title' => $request->title,
                   'date' => $request->start,
-                  'user_id' => Auth::user()->id
+                  'user_id' => Auth::user()->id,
+                  'lead_id' => $request->customer_id
               ]);
 
               return response()->json($event);
@@ -62,5 +67,21 @@ class CalendarController extends Controller
              # code...
              break;
         }
+    }
+
+
+    public function showAlert(){
+        $time = date('H:i:s');
+        $records = Comment::select('time', 'title', 'id', 'visibility', 'user_id')->where('date', Date('Y-m-d'))->where('seen', 0)->get();
+        foreach($records as $record){
+            if($record->time <= $time){
+                return ['status' => true, 'message' => $record->title, 'id' => $record->id, 'visibility' => $record->visibility, 'user_id' => $record->user_id];
+            }
+        }
+    }
+
+    public function seen(Request $request){
+        $id = $request->id;
+        return Comment::where('id', $id)->update(['seen' => 1]);
     }
 }

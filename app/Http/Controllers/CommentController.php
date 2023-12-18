@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Customer;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class CommentController extends Controller
      */
     public function create(Request $request)
     {
-        $customer = Customer::find($request->id);
+        $customer = Payment::find($request->id);
         return view('comment.create', compact('customer'));
     }
 
@@ -36,6 +37,7 @@ class CommentController extends Controller
         $store->title = $request->title;
         $store->lead_id = $request->id;
         $store->user_id = Auth::user()->id;
+        $store->visibility = $request->visibility;
         $store->save();
         return back()->with('success', 'Comment Added Successfully.');
     }
@@ -45,7 +47,7 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $comment = Comment::where('lead_id', $id)->orderBy('id', 'desc')->get();
+        $comment = Comment::join('users as u', 'u.id', 'comments.user_id', 'comments.create_at as create_at')->where('lead_id', $id)->orderBy('comments.id', 'desc')->get();
         return view('comment.show', compact('comment'));
     }
 

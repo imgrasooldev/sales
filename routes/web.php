@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('fullcalender', [CalendarController::class, 'index'])->name('calendar.index');
     Route::post('fullcalenderAjax', [CalendarController::class, 'ajax']);
 
+    Route::get('/message', [CalendarController::class, 'showAlert']);
+    Route::get('/seen', [CalendarController::class, 'seen']);
 
     Route::get('chart', [HomeController::class, 'chart'])->name('chart');
     Route::get('download-pdf/{id}', [HomeController::class,'generatePdf'])->name('pdf');
