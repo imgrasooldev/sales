@@ -45,7 +45,7 @@
                                         <div class="col-md-3">
                                             <div class="profimg">
                                                 <img style="width: 100%"
-                                                    src="{{ asset('/profiles/' . $user->profile_image) }}"
+                                                    src="{{ asset('public/profiles/' . $user->profile_image) }}"
                                                     alt="{{ $user->name }} {{ $user->last_name }}">
                                             </div>
                                         </div>

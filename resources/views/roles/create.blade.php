@@ -22,15 +22,15 @@
 
                         <div class="celebration" style="z-index: -1 !important">
                             <div class="imgg1">
-                                <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
+                                <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                     style="display:none;">
                             </div>
                             <div class="imgg2">
-                                <img class="sales-image" src="{{ asset('/assets/images/celeb.gif') }}"
+                                <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
                                     style="display:none;">
                             </div>
                             <div class="imgg3">
-                                <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
+                                <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                     style="display:none;">
                             </div>
                         </div>

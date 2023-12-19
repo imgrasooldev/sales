@@ -2,7 +2,7 @@
    <div class="row align-items-center">
       <div class="col-md-4">
          <div class="livedate">
-            <img src="{{ asset('/assets/images/cloud.png') }}" alt="cloud">
+            <img src="{{ asset('public/assets/images/cloud.png') }}" alt="cloud">
             <h6>{{ date('D, d M Y') }}</h6>
          </div>
       </div>
@@ -14,7 +14,7 @@
       </div>
       <div class="col-md-4">
          <div class="mainuser">
-            <img src="{{ asset('/assets/images/user.png') }}" alt="{{ Auth::user()->name }}">
+            <img src="{{ asset('public/assets/images/user.png') }}" alt="{{ Auth::user()->name }}">
             <h6>{{ Auth::user()->name }}<span>{{Auth::user()->email }}</span></h6>
          </div>
       </div>
