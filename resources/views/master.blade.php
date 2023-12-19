@@ -121,5 +121,3 @@
     }
 </script>
 
-@yield('admin-dashboard')
-{{-- @include('includes.scripts') --}}
