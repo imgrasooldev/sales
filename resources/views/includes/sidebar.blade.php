@@ -1,5 +1,5 @@
 <div class="sidebar">
-   <a href="{{ Route('home') }}"><img src="{{ asset('public/assets/images/logo.png') }}" alt=""></a>
+   <a href="{{ Route('home') }}"><img src="{{ asset('/assets/images/logo.png') }}" alt=""></a>
    <div class="menu-Bar">
       <span></span>
       <span></span>

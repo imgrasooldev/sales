@@ -22,15 +22,15 @@
 
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>
@@ -43,68 +43,68 @@
                                     <h4>Sales Overview</h4>
                                     <div class="row">
                                         @can('show-today-sale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('today') }}" class="col-md-4">
                                                 <h5>
                                                     <span>Today</span> ${{ number_format($today[0]->amount) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-yesterday-sale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('yesterday') }}" class="col-md-4">
                                                 <h5>
                                                     <span>Yesterday</span> ${{ number_format($yesterday[0]->amount) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-upsale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('thisMonth') }}" class="col-md-4">
                                                 <h5>
                                                     <span>This Month</span>${{ number_format($month[0]->amount) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-frontsale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('frontsale') }}" class="col-md-4">
                                                 <h5>
                                                     <span>Month Frontsale</span>${{ number_format($month_sale) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-this-month-sale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('upsale') }}" class="col-md-4">
                                                 <h5>
                                                     <span>Month Upsale</span>${{ number_format($month_upsale) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-un-paid-this-month')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('unPaidThisMonth') }}" class="col-md-4">
                                                 <h5>
                                                     <span>Unpaid This Month</span>
                                                     ${{ number_format($un_paid_month[0]->amount) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-last-month-sale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('lastMonth') }}" class="col-md-4">
                                                 <h5>
                                                     <span>Last Month</span> ${{ number_format($last_month[0]->amount) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
 
                                         @can('show-this-year-sale')
-                                            <div class="col-md-4">
+                                            <a href="{{ Route('lastMonth') }}" class="col-md-4">
                                                 <h5>
                                                     <span>This Year</span> ${{ number_format($year[0]->amount) }}
                                                 </h5>
-                                            </div>
+                                            </a>
                                         @endcan
                                     </div>
                                 </div>
@@ -140,13 +140,13 @@
                                                                         @if (Auth::user()->id == $check_user->id)
                                                                             <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                                 <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                    src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                    src="{{ asset('/profiles/' . $user->profile_image) }}"
                                                                                     alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                     title="{{ $user->name }} {{ $user->last_name }}">
                                                                             </a>
                                                                         @else
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                src="{{ asset('/profiles/' . $user->profile_image) }}"
                                                                                 alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                 title="{{ $user->name }} {{ $user->last_name }}">
                                                                         @endif
@@ -155,7 +155,7 @@
                                                                     @can('show-all-profiles')
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
+                                                                                src="{{ asset('/profiles/' . $user->profile_image) }}"
                                                                                 alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                 title="{{ $user->name }} {{ $user->last_name }}">
                                                                         </a>
@@ -205,7 +205,7 @@
                                                                 @can('show-all-profiles')
                                                                     <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                         <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                            src="{{ asset('/profiles/' . $check_user->profile_image) }}"
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     </a>
@@ -214,13 +214,13 @@
                                                                     @if (Auth::user()->id == $check_user->id)
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                                src="{{ asset('/profiles/' . $check_user->profile_image) }}"
                                                                                 alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                                 title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                         </a>
                                                                     @else
                                                                         <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
+                                                                            src="{{ asset('/profiles/' . $check_user->profile_image) }}"
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     @endif
@@ -269,7 +269,7 @@
                                                                 <span>
                                                                     <a href="{{ Route('brands.edit', $brand->id) }}">
                                                                         <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                            src="{{ asset('public/images/' . $brand->image) }}"
+                                                                            src="{{ asset('/images/' . $brand->image) }}"
                                                                             alt="{{ $brand->name }}"
                                                                             title="{{ $brand->name }}">
                                                                     </a>
@@ -287,7 +287,7 @@
                                                             <span>
                                                                 <a href="">
                                                                     <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                        src="{{ asset('public/images/' . $check_brand->image) }}"
+                                                                        src="{{ asset('/images/' . $check_brand->image) }}"
                                                                         alt="{{ $check_brand->name }}"
                                                                         title="{{ $check_brand->name }}">
                                                                 </a>

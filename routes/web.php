@@ -34,6 +34,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('profile', ProfileController::class);
     Route::resource('comment', CommentController::class);
 
+
+    Route::get('today', [SaleController::class, 'today'])->name('today');
+    Route::get('yesterday', [SaleController::class, 'yesterday'])->name('yesterday');
+    Route::get('thisMonth', [SaleController::class, 'thisMonth'])->name('thisMonth');
+    Route::get('unPaidThisMonth', [SaleController::class, 'unPaidThisMonth'])->name('unPaidThisMonth');
+    Route::get('upsale', [SaleController::class, 'upsale'])->name('upsale');
+    Route::get('frontsale', [SaleController::class, 'frontsale'])->name('frontsale');
+    Route::get('year', [SaleController::class, 'year'])->name('year');
+    Route::get('lastMonth', [SaleController::class, 'lastMonth'])->name('lastMonth');
+
     Route::get('fullcalender', [CalendarController::class, 'index'])->name('calendar.index');
     Route::post('fullcalenderAjax', [CalendarController::class, 'ajax']);
 

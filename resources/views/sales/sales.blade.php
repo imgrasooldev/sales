@@ -35,56 +35,44 @@
                     <div class="mainWrap">
                         <div style="margin: 10px" class="">
                             <div class="allpaid">
-                                <h4>Customer Sale Details</h4>
+                                <h4>Sales Data</h4>
                                 <table id="leadsTable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Sr #</th>
                                             <th>Date</th>
-                                            <th>Brand</th>
                                             <th>Customer Name</th>
-                                            <th>Phone Number</th>
                                             <th>Email</th>
+                                            <th>Phone Number</th>
                                             <th>Bussiness Name</th>
-                                            <th>Package</th>
                                             <th>Amount</th>
-                                            <th>Remaining</th>
-                                            <th>Agent</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="customerData">
                                         @php
-                                            $count = 1;
+                                            $i = 1;
                                         @endphp
+                                    <tbody id="customerData">
                                         @foreach ($sales as $sale)
-                                            <tr>
-                                                <td>{{ $count++ }}</td>
-                                            <td>{{ $sale->date }}</td>
-                                                <td>{{ $sale->brand }}</td>
-                                                <td>{{ $sale->customer_name }}</td>
-                                                <td>{{ $sale->customerphone }}</td>
-                                                <td>{{ $sale->customeremail }}</td>
-                                                <td>{{ $sale->bussiness_name }}</td>
-                                                <td>{{ $sale->package }}</td>
-                                                <td>{{ $sale->amount }}</td>
-                                                <td>{{ $sale->remanining }}</td>
-                                                <td>{{ $sale->agent }}</td>
-                                            </tr>
-                                        @endforeach
+                                        <tr>
+                                            <th>{{ $i++ }}</th>
+                                            <th>{{ $sale->date }}</th>
+                                            <th>{{ $sale->customer_name }}</th>
+                                            <th>{{ $sale->email }}</th>
+                                            <th>{{ $sale->phone_number }}</th>
+                                            <th>{{ $sale->bussiness_name }}</th>
+                                            <th>{{ $sale->sum }}</th>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>Sr #</th>
                                             <th>Date</th>
-                                            <th>Brand</th>
                                             <th>Customer Name</th>
                                             <th>Phone Number</th>
                                             <th>Email</th>
                                             <th>Bussiness Name</th>
-                                            <th>Package</th>
                                             <th>Amount</th>
-                                            <th>Remaining</th>
-                                            <th>Agent</th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -30,7 +30,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Payment::select('payments.*', 'b.name as brand')->join('brands as b', 'b.id', 'payments.brand')->orderBy('payments.id', 'desc')->groupBy('customeremail')->get();
+        $customers = Payment::select('payments.*')->orderBy('payments.id', 'desc')->groupBy('customeremail')->get();
         $brands = Brand::all();
         return view('customers.index', compact('customers', 'brands'));
     }
@@ -55,21 +55,11 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $new = Payment::create($request->only([
-            'date',
-            'brand',
             'customer_name',
-            'phone_number',
-            'email',
+            'customerphone',
+            'customeremail',
             'bussiness_name',
-            'package',
-            'amount',
-            'remaining',
-            'agent',
-            'assigned_to',
-            'welcome_email',
-            'assigned_pm',
-            'project_status',
-            'calling'
+            'comment',
         ]));
         if ($new) {
             return back()->with('success', 'New Customer Created Successfully.');

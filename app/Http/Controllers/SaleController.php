@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Payment;
+use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
@@ -68,5 +69,160 @@ class SaleController extends Controller
 
     public function destroy($id)
     {
+    }
+
+    public function today()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )->where('is_paid', 1)
+            ->whereDate('created_at', now()->toDateString())
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function upsale()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )
+            ->where('is_paid', 1)
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->whereIn('paymenttype', ['Upsell', 'Upsell Partial'])
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function frontsale()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )
+            ->where('is_paid', 1)
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->whereNotIn('paymenttype', ['Upsell', 'Upsell Partial'])
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function yesterday()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )->where('is_paid', 1)
+            ->whereDate('created_at', now()->subDay()->toDateString())
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function thisMonth()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )->where('is_paid', 1)
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function unPaidThisMonth()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )->where('is_paid', 0)
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function year()
+    {
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )->where('is_paid', 1)
+            ->whereYear('created_at', now()->year)
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
+    }
+
+    public function lastMonth()
+    {
+        $startOfMonth = Carbon::now()->subMonth()->startOfMonth();
+        $endOfMonth = Carbon::now()->subMonth()->endOfMonth();
+        $sales = DB::table('payments')
+            ->select(
+                'customeremail as email',
+                'amount as sum',
+                'id',
+                'customer_name',
+                'date',
+                'customerphone as phone_number',
+                'bussiness_name'
+            )
+            ->where('is_paid', 1)
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('sales.sales', compact('sales'));
     }
 }

@@ -36,24 +36,24 @@
                             </div> --}}
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="mainWrap">
-                        <!-- @can('customer-create')
+                        @can('customer-create')
                             <a href="{{ Route('customers.create') }}" style="margin: 10px" class="btn btn-success">New Customer</a>
-                        @endcan -->
+                        @endcan
                         <div style="margin: 10px" class="">
                             <div class="allpaid">
                                 <div style="display: flex; justify-content: space-between">

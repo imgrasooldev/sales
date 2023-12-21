@@ -44,7 +44,7 @@
                                 <h4>Add New Customer</h4>
                                 <div class="row">
 
-
+{{--
                                     <div class="col-md-6">
                                         <div class="addfield">
                                             <label>data</label>
@@ -54,7 +54,7 @@
                                                     {{ $errors->first('date') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="col-md-6">
@@ -66,9 +66,9 @@
                                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('target'))
+                                            @if ($errors->has('brand'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
-                                                    {{ $errors->first('target') }}</p>
+                                                    {{ $errors->first('brand') }}</p>
                                             @endif
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                             <input required name="customer_name" placeholder="Customer Name" type="text">
                                             @if ($errors->has('customer_name'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
-                                                    {{ $errors->first('customer_name') }}</p>
+                                                    {{ $errors->first('customer_namecustomer_name') }}</p>
                                             @endif
                                         </div>
                                     </div>
@@ -88,16 +88,28 @@
                                     <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Email</label>
-                                            <input required name="email" placeholder="Email" type="email">
-                                            @if ($errors->has('email'))
+                                            <input required name="customeremail" placeholder="Email" type="email">
+                                            @if ($errors->has('customeremail'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
-                                                    {{ $errors->first('email') }}</p>
+                                                    {{ $errors->first('customeremail') }}</p>
                                             @endif
                                         </div>
                                     </div>
 
 
                                     <div class="col-md-6">
+                                        <div class="addfield">
+                                            <label>Brand</label>
+                                            <input required name="customerphone" placeholder="Customer Phone" type="number">
+
+                                            @if ($errors->has('customerphone'))
+                                                <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
+                                                    {{ $errors->first('customerphone') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
                                         <div class="addfield">
                                             <label>Bussiness Name</label>
                                             <input required name="bussiness_name" placeholder="Bussiness Name" type="text">
@@ -108,8 +120,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <div class="addfield">
+                                            <textarea class="form-control" required name="comment" placeholder="Comment For Bussiness Details"></textarea>
+                                            @if ($errors->has('comment'))
+                                                <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
+                                                    {{ $errors->first('comment') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
 
-                                    <div class="col-md-6">
+
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Package</label>
                                             <input required name="package" placeholder="Package" type="text">
@@ -118,10 +140,10 @@
                                                     {{ $errors->first('package') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Amount</label>
                                             <input required name="amount" placeholder="Amount" type="text">
@@ -130,22 +152,22 @@
                                                     {{ $errors->first('amount') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Remaining</label>
-                                            <input required name="remaining" placeholder="Remaining" type="text">
-                                            @if ($errors->has('remaining'))
+                                            <input required name="remanining" placeholder="Remaining" type="text">
+                                            @if ($errors->has('remanining'))
                                                 <p class="bg-danger w-full mt-2 p-2 rounded-lg text-white">
-                                                    {{ $errors->first('remaining') }}</p>
+                                                    {{ $errors->first('remanining') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Agent</label>
                                             <input required name="agent" placeholder="Agent" type="text">
@@ -154,11 +176,11 @@
                                                     {{ $errors->first('agent') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Assigned To</label>
                                             <input required name="assigned_to" placeholder="Assigned To" type="text">
@@ -167,9 +189,9 @@
                                                     {{ $errors->first('assigned_to') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-
+{{--
                                     <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Welcome Email</label>
@@ -179,9 +201,9 @@
                                                     {{ $errors->first('welcome_email') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Assigned PM</label>
                                             <input required name="assigned_pm" placeholder="Assigned PM" type="text">
@@ -190,10 +212,10 @@
                                                     {{ $errors->first('assigned_pm') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="addfield">
                                             <label>First Name</label>
                                             <input required name="first_name" placeholder="John" type="text">
@@ -202,9 +224,9 @@
                                                     {{ $errors->first('first_name') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-
+{{--
                                     <div class="col-md-6">
                                         <div class="addfield">
                                             <label>Project Status</label>
@@ -214,8 +236,8 @@
                                                     {{ $errors->first('project_status') }}</p>
                                             @endif
                                         </div>
-                                    </div>
-
+                                    </div> --}}
+{{--
 
                                     <div class="col-md-6">
                                         <div class="addfield">
@@ -226,7 +248,7 @@
                                                     {{ $errors->first('calling') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
                                 </div>
