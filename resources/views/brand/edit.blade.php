@@ -52,7 +52,7 @@
                                     <div class="col-md-12">
                                         <div class="addfield">
                                             <img style="width: 70px; height: 70px; border-radius: 50%; margin-right: 20px"
-                                                src="{{ asset('/images/' . $brand->image) }}"></img>
+                                                src="{{ asset('public/images/' . $brand->image) }}"></img>
                                             <label style="margin-top: 20px">Image</label>
                                             <input name="id" value="{{ $brand->id }}" type="hidden">
                                             <input name="image" class="form-control" type="file">
