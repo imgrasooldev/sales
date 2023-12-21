@@ -27,10 +27,10 @@ class CustomerController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
-        $customers = Payment::select('payments.*')->orderBy('payments.id', 'desc')->groupBy('customeremail')->get();
+        $customers = Payment::select('payments.*', 'b.name as brand')->join('brands as b', 'b.id', 'brand')->groupBy('customeremail')->orderBy('payments.id', 'desc')->get();
         $brands = Brand::all();
         return view('customers.index', compact('customers', 'brands'));
     }
