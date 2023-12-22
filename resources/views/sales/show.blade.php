@@ -41,6 +41,7 @@
                                         <tr>
                                             <th>Sr #</th>
                                             <th>Date</th>
+                                            <th>Transaction Key</th>
                                             <th>Brand</th>
                                             <th>Customer Name</th>
                                             <th>Phone Number</th>
@@ -59,7 +60,8 @@
                                         @foreach ($sales as $sale)
                                             <tr>
                                                 <td>{{ $count++ }}</td>
-                                            <td>{{ $sale->date }}</td>
+                                                <td>{{ $sale->date }}</td>
+                                                <td>{{ $sale->transactionkey }}</td>
                                                 <td>{{ $sale->brand }}</td>
                                                 <td>{{ $sale->customer_name }}</td>
                                                 <td>{{ $sale->customerphone }}</td>
@@ -76,6 +78,7 @@
                                         <tr>
                                             <th>Sr #</th>
                                             <th>Date</th>
+                                            <th>Transaction Key</th>
                                             <th>Brand</th>
                                             <th>Customer Name</th>
                                             <th>Phone Number</th>

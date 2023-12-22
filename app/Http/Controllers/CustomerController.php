@@ -60,6 +60,7 @@ class CustomerController extends Controller
             'customeremail',
             'bussiness_name',
             'comment',
+            'brand'
         ]));
         if ($new) {
             return back()->with('success', 'New Customer Created Successfully.');

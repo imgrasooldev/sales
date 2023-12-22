@@ -38,6 +38,16 @@
                     </div>
                     <div class="mainWrap">
                         <div class="container">
+
+                            <div class="salesOverview ">
+                                <div class="row clock-container">
+                                    <h1 class="clock">New York <span id="newYorkClock"></span></h1>
+                                    <h1 class="clock">Los Angeles <span id="losAngelesClock"></span></h1>
+                                    <h1 class="clock">Chicago <span id="chicagoClock"></span></h1>
+                                    <h1 class="clock">Pakistan <span id="pakistanClock"></span></h1>
+                                </div>
+                            </div>
+
                             @can('list-sales-cards')
                                 <div class="salesOverview">
                                     <h4>Sales Overview</h4>
@@ -510,6 +520,41 @@
             // Remove the temporary input element
             tempInput.remove();
         })
+
+        function updateClocks() {
+            const newYorkClock = document.getElementById('newYorkClock');
+            const losAngelesClock = document.getElementById('losAngelesClock');
+            const chicagoClock = document.getElementById('chicagoClock');
+            const pakistanClock = document.getElementById('pakistanClock');
+
+            const currentTime = new Date();
+
+            const options = {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true    
+            };
+
+            newYorkClock.innerText = currentTime.toLocaleTimeString('en-US', {
+                ...options,
+                timeZone: 'America/New_York'
+            });
+            losAngelesClock.innerText = currentTime.toLocaleTimeString('en-US', {
+                ...options,
+                timeZone: 'America/Los_Angeles'
+            });
+            chicagoClock.innerText = currentTime.toLocaleTimeString('en-US', {
+                ...options,
+                timeZone: 'America/Chicago'
+            });
+            pakistanClock.innerText = currentTime.toLocaleTimeString('en-US', {
+                ...options,
+                timeZone: 'Asia/Karachi'
+            });
+        }
+
+        setInterval(updateClocks, 1000); // Update clocks every sec
     </script>
     </body>
 

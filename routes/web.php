@@ -59,3 +59,14 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::post('update-brand', [HomeController::class, 'update_brand'])->name('update_brand');
     // Route::get('delete-brand/{id}', [HomeController::class, 'delete_brand'])->name('delete_brand');
 });
+
+Route::get('/get-times', function () {
+    $times = [
+        'new_york'   => now('America/New_York')->toTimeString(),
+        'los_angeles' => now('America/Los_Angeles')->toTimeString(),
+        'chicago'     => now('America/Chicago')->toTimeString(),
+        'pakistan'    => now('Asia/Karachi')->toTimeString(),
+    ];
+
+    return response()->json($times);
+});

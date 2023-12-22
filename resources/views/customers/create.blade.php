@@ -99,7 +99,7 @@
 
                                     <div class="col-md-6">
                                         <div class="addfield">
-                                            <label>Brand</label>
+                                            <label>Customer Phone</label>
                                             <input required name="customerphone" placeholder="Customer Phone" type="number">
 
                                             @if ($errors->has('customerphone'))
