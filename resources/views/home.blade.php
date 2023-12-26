@@ -41,10 +41,10 @@
 
                             <div class="salesOverview ">
                                 <div class="row clock-container">
-                                    <h1 class="clock">New York <span id="newYorkClock"></span></h1>
-                                    <h1 class="clock">Los Angeles <span id="losAngelesClock"></span></h1>
-                                    <h1 class="clock">Chicago <span id="chicagoClock"></span></h1>
-                                    <h1 class="clock">Pakistan <span id="pakistanClock"></span></h1>
+                                    <h1 class="clock">Eastern Standard<span id="newYorkClock"></span></h1>
+                                    <h1 class="clock">Pacific Standard<span id="losAngelesClock"></span></h1>
+                                    <h1 class="clock">Central Standard<span id="chicagoClock"></span></h1>
+                                    <h1 class="clock">Mountain Standard<span id="pakistanClock"></span></h1>
                                 </div>
                             </div>
 
@@ -550,7 +550,7 @@
             });
             pakistanClock.innerText = currentTime.toLocaleTimeString('en-US', {
                 ...options,
-                timeZone: 'Asia/Karachi'
+                timeZone: 'America/Denver'
             });
         }
 

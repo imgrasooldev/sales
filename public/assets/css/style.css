@@ -393,7 +393,7 @@ ul.sidebarmenu li.active a {
 }
 
 .clock{
-    font-size: 20px;
+    font-size: 16px;
     width: 200px;
     height: 200px;
     display: flex;
