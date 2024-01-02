@@ -1,5 +1,8 @@
+<!-- Assuming this is your Blade template file -->
+
 @include('includes.siteHeader')
 @yield('admin-dashboard')
+
 <style>
     body {
         margin: 0;
@@ -34,7 +37,6 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         text-align: center;
         z-index: 999999;
-
     }
 
     /* Close button */
@@ -47,46 +49,62 @@
         cursor: pointer;
         font-weight: bold;
     }
+    #customerEmail{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        background-color: lightgray;
+        padding: 5px;
+        margin-bottom: 5px;
+        border-radius: 28px;
+    }
+    #message{
+        /* background-color: lightblue; */
+        margin-top: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 </style>
-
 
 <div class="overlay" id="alertOverlay">
     <div class="alert">
+        <label id="customerEmail"></label>
         <p id="message"></p>
-        <button class="close-btn btn-success" onclick="seen()">seen</button>
+        <button class="close-btn btn-success" onclick="seen()">Seen</button>
         <button class="close-btn" onclick="closeAlert()">Close</button>
     </div>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Set interval to show the alert every 5 seconds
-        setInterval(function() {
+        setInterval(function () {
             fetchDataAndShowAlert();
         }, 5000);
     });
-    var id = null;
 
     function fetchDataAndShowAlert() {
         $.ajax({
             url: '/message',
             method: 'GET',
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var user_id = {{ Auth::user()->id }}
-                if(data.visibility == null || data.visibility == 0){
-                    if(data.user_id == user_id){
+                if (data.visibility == null || data.visibility == 0) {
+                    if (data.user_id == user_id) {
+                        console.log(data)
+                        $('#customerEmail').text('Customer: '+ data.lead_id);
                         $('#message').text(data.message);
                         $('#message').data('value', data.id);
                         showAlert();
                     }
-                }else{
-                        $('#message').text(data.message);
-                        $('#message').data('value', data.id);
-                        showAlert();
+                } else {
+                    $('#message').text(data.message);
+                    $('#message').data('value', data.id);
+                    showAlert();
                 }
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 console.error('Error:', errorThrown);
             }
         });
@@ -101,16 +119,15 @@
                 id: id
             },
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 console.log('Message seen:', data);
                 closeAlert();
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 console.error('Error:', errorThrown);
             }
         });
     }
-
 
     function showAlert() {
         document.getElementById('alertOverlay').style.display = 'flex';
@@ -121,3 +138,8 @@
     }
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Your share-modal.js code here
+    });
+</script>

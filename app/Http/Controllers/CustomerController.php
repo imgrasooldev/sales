@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Brand;
+use App\Models\Comment;
 use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
@@ -54,6 +57,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $date = Carbon::now()->toDateString();
+        $time = Carbon::now()->toTimeString();
         $new = Payment::create($request->only([
             'customer_name',
             'customerphone',
@@ -62,6 +67,15 @@ class CustomerController extends Controller
             'comment',
             'brand'
         ]));
+        // dd($new->id);
+        $addComment = new Comment();
+        $addComment->title = $request->comment;
+        $addComment->lead_id = $new->customeremail;
+        $addComment->user_id = Auth::user()->id;
+        $addComment->date = $date;
+        $addComment->time = $time;
+        $addComment->save();
+
         if ($new) {
             return back()->with('success', 'New Customer Created Successfully.');
         }

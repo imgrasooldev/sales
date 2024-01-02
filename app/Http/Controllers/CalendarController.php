@@ -73,10 +73,10 @@ class CalendarController extends Controller
 
     public function showAlert(){
         $time = date('H:i:s');
-        $records = Comment::select('time', 'title', 'id', 'visibility', 'user_id')->where('date', Date('Y-m-d'))->where('seen', NULL)->get();
+        $records = Comment::select('time', 'title', 'id', 'visibility', 'user_id', 'lead_id')->where('date', Date('Y-m-d'))->where('seen', NULL)->orWhere('seen', '')->get();
         foreach($records as $record){
             if($record->time <= $time){
-                return ['status' => true, 'message' => $record->title, 'id' => $record->id, 'visibility' => $record->visibility, 'user_id' => $record->user_id];
+                return ['status' => true, 'message' => $record->title, 'id' => $record->id, 'visibility' => $record->visibility, 'user_id' => $record->user_id, 'lead_id' => $record->lead_id];
             }
         }
     }

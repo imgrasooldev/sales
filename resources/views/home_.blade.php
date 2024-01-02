@@ -22,15 +22,15 @@
 
                             <div class="celebration">
                                 <div class="imgg1">
-                                    <img class="sales-image" src="{{ asset('publicpublic/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg2">
-                                    <img class="sales-image" src="{{ asset('publicpublic/assets/images/celeb.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/celeb.gif') }}"
                                         style="display:none;">
                                 </div>
                                 <div class="imgg3">
-                                    <img class="sales-image" src="{{ asset('publicpublic/assets/images/fireworks.gif') }}"
+                                    <img class="sales-image" src="{{ asset('public/assets/images/fireworks.gif') }}"
                                         style="display:none;">
                                 </div>
                             </div>
@@ -41,10 +41,10 @@
 
                             <div class="salesOverview ">
                                 <div class="row clock-container">
-                                    <h1 class="clock">Eastern Standard<span id="newYorkClock"></span></h1>
-                                    <h1 class="clock">Pacific Standard<span id="losAngelesClock"></span></h1>
-                                    <h1 class="clock">Central Standard<span id="chicagoClock"></span></h1>
-                                    <h1 class="clock">Mountain Standard<span id="pakistanClock"></span></h1>
+                                    <h1 class="clock">New York <span id="newYorkClock"></span></h1>
+                                    <h1 class="clock">Los Angeles <span id="losAngelesClock"></span></h1>
+                                    <h1 class="clock">Chicago <span id="chicagoClock"></span></h1>
+                                    <h1 class="clock">Pakistan <span id="pakistanClock"></span></h1>
                                 </div>
                             </div>
 
@@ -150,13 +150,13 @@
                                                                         @if (Auth::user()->id == $check_user->id)
                                                                             <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                                 <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                    src="{{ asset('publicpublic/profiles/' . $user->profile_image) }}"
+                                                                                    src="{{ asset('public/profiles/' . $user->profile_image) }}"
                                                                                     alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                     title="{{ $user->name }} {{ $user->last_name }}">
                                                                             </a>
                                                                         @else
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('publicpublic/profiles/' . $user->profile_image) }}"
+                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
                                                                                 alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                 title="{{ $user->name }} {{ $user->last_name }}">
                                                                         @endif
@@ -165,7 +165,7 @@
                                                                     @can('show-all-profiles')
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('publicpublic/profiles/' . $user->profile_image) }}"
+                                                                                src="{{ asset('public/profiles/' . $user->profile_image) }}"
                                                                                 alt="{{ $user->name }} {{ $user->last_name }}"
                                                                                 title="{{ $user->name }} {{ $user->last_name }}">
                                                                         </a>
@@ -215,7 +215,7 @@
                                                                 @can('show-all-profiles')
                                                                     <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                         <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ asset('publicpublic/profiles/' . $check_user->profile_image) }}"
+                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     </a>
@@ -224,13 +224,13 @@
                                                                     @if (Auth::user()->id == $check_user->id)
                                                                         <a href="{{ Route('profile.show', $check_user->id) }}">
                                                                             <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                                src="{{ asset('publicpublic/profiles/' . $check_user->profile_image) }}"
+                                                                                src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
                                                                                 alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                                 title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                         </a>
                                                                     @else
                                                                         <img style="width: 100px; height: 100px; border-radius: 50%"
-                                                                            src="{{ asset('publicpublic/profiles/' . $check_user->profile_image) }}"
+                                                                            src="{{ asset('public/profiles/' . $check_user->profile_image) }}"
                                                                             alt="{{ $check_user->name }} {{ $check_user->last_name }}"
                                                                             title="{{ $check_user->name }} {{ $check_user->last_name }}">
                                                                     @endif
@@ -279,7 +279,7 @@
                                                                 <span>
                                                                     <a href="{{ Route('brands.edit', $brand->id) }}">
                                                                         <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                            src="{{ asset('publicpublic/images/' . $brand->image) }}"
+                                                                            src="{{ asset('public/images/' . $brand->image) }}"
                                                                             alt="{{ $brand->name }}"
                                                                             title="{{ $brand->name }}">
                                                                     </a>
@@ -297,7 +297,7 @@
                                                             <span>
                                                                 <a href="">
                                                                     <img style="width: 80px; height: 80px; border-radius: 50%"
-                                                                        src="{{ asset('publicpublic/images/' . $check_brand->image) }}"
+                                                                        src="{{ asset('public/images/' . $check_brand->image) }}"
                                                                         alt="{{ $check_brand->name }}"
                                                                         title="{{ $check_brand->name }}">
                                                                 </a>
@@ -550,7 +550,7 @@
             });
             pakistanClock.innerText = currentTime.toLocaleTimeString('en-US', {
                 ...options,
-                timeZone: 'America/Denver'
+                timeZone: 'Asia/Karachi'
             });
         }
 
