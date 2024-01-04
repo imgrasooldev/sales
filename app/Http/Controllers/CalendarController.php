@@ -59,9 +59,20 @@ class CalendarController extends Controller
              break;
 
            case 'delete':
-              $event = Comment::select('title')->where('id',$request->id)->first();
-
-              return response()->json($event->title);
+              $event = Comment::select('lead_id' ,'title')->where('id',$request->id)->first();
+              $customer_name = '';
+              if($event){
+                $customer_name = Payment::select('customer_name')->where('customeremail', $event->lead_id)->first();
+                if($customer_name){
+                    $customer_name = $customer_name->customer_name;
+                }else{
+                    $customer_name = Payment::select('customer_name')->where('id', $event->lead_id)->first();
+                    if($customer_name){
+                        $customer_name = $customer_name->customer_name;
+                    }
+                }
+              }
+              return response()->json($event->lead_id.' <br/>'.$customer_name.'<br/>'.$event->title);
              break;
 
            default:
